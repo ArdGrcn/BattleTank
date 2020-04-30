@@ -75,3 +75,10 @@ DerivedDataCache/*
 
 #Unreal Engine 4 starter content
 Content/StarterContent/*
+
+#Main menu background image
+Content/UI/MainMenu_BG_Img.uasset
+
+#Fonts
+Content/UI/inktank.uasset
+Content/UI/inktank_Font.uasset
