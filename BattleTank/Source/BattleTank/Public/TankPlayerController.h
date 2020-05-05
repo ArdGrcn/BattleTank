@@ -31,6 +31,8 @@ private:
 
 	FVector2D CrosshairScreenLocation() const;
 
+	bool GetLookDirection(FVector2D CrosshairScreenLocation, FVector& LookDirection) const;
+
 	// Member variables
 	UPROPERTY(EditAnywhere)
 	float CrosshairXLocation = 0.5;
