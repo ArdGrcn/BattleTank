@@ -2,14 +2,13 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "CoreMinimal.h"
+#include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
-#include "TankPlayerController.generated.h" // Must be the lsat include
+#include "Tank.h"
+#include "TankPlayerController.generated.h" // Must be the last include
 
-/**
- * 
- */
+
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
@@ -27,11 +26,13 @@ private:
 	// where the crosshair intersects the world
 	void AimTowardsCrosshair();
 
-	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+	bool GetSightRayHitLocation(FVector& HitLocation) const;
 
 	FVector2D CrosshairScreenLocation() const;
 
 	bool GetLookDirection(FVector2D CrosshairScreenLocation, FVector& LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 
 	// Member variables
 	UPROPERTY(EditAnywhere)
@@ -39,4 +40,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float CrosshairYLocation = 0.33333;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 100000.0;
 };
