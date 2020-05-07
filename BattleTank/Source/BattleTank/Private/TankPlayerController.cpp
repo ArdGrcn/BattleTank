@@ -13,10 +13,6 @@ void ATankPlayerController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("Player controlled tank not found."))
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Player controls %s."), *PlayerControlledTank->GetName());
-	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -39,7 +35,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		// TODO tell the controlled tank to aim at HitLocation
+		GetPlayerControlledTank()->AimAt(HitLocation);
 	}
 }
 
