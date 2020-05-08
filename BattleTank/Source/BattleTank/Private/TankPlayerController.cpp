@@ -15,6 +15,7 @@ void ATankPlayerController::BeginPlay()
 	}
 }
 
+
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -22,10 +23,12 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrosshair();
 }
 
+
 ATank* ATankPlayerController::GetPlayerControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
 }
+
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
@@ -38,6 +41,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 		GetPlayerControlledTank()->AimAt(HitLocation);
 	}
 }
+
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 {
@@ -54,6 +58,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	return false;
 }
 
+
 FVector2D ATankPlayerController::CrosshairScreenLocation() const
 {
 	int32 ViewportSizeX, ViewportSizeY;
@@ -62,6 +67,7 @@ FVector2D ATankPlayerController::CrosshairScreenLocation() const
 
 	return FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 }
+
 
 bool ATankPlayerController::GetLookDirection(FVector2D CrosshairScreenLocation, FVector& LookDirection) const
 {
@@ -74,6 +80,7 @@ bool ATankPlayerController::GetLookDirection(FVector2D CrosshairScreenLocation, 
 		LookDirection
 	);
 }
+
 
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
 {
