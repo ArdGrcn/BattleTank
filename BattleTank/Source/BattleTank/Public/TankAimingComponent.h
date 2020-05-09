@@ -16,7 +16,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 	
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation, float LaunchSpeed) const;
 
 	// TODO SetTurretReference
 
@@ -25,5 +25,5 @@ public:
 private:
 	UStaticMeshComponent* Barrel = nullptr;
 
-	void MoveBarrelTowards(FVector AimDirection);
+	void MoveBarrelTowards(FVector AimDirection) const;
 };
