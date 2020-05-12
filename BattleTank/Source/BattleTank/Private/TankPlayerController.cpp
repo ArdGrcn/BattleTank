@@ -56,7 +56,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 		}	
 	}
 
-	return false;
+	return false; // if set to true tank aim resets to default
 }
 
 
