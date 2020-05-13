@@ -56,7 +56,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 		}	
 	}
 
-	return false; // if set to true tank aim resets to default
+	return false; // if set to true turret and barrel reset to default position when no solution is found
 }
 
 
