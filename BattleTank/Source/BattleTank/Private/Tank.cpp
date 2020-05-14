@@ -14,13 +14,13 @@ ATank::ATank()
 }
 
 
-void ATank::SetTurretReference(UTankTurret* TurretToSet)
+void ATank::SetTurretReference(UTankTurret* TurretToSet) const
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
 
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
+void ATank::SetBarrelReference(UTankBarrel* BarrelToSet) const
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
@@ -45,4 +45,10 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::AimAt(FVector HitLocation) const
 {
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+}
+
+
+void ATank::Fire() const
+{
+	UE_LOG(LogTemp, Warning, TEXT("Firing."));
 }

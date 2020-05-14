@@ -17,10 +17,13 @@ public:
 	void AimAt(FVector HitLocation) const;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet) const;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
+	void SetTurretReference(UTankTurret* TurretToSet) const;
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire() const;
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
