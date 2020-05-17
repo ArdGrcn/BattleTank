@@ -22,7 +22,7 @@ public:
 	void SetTurretReference(UTankTurret* TurretToSet) const;
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
-	void Fire() const;
+	void Fire();
 
 	void AimAt(FVector HitLocation) const;
 
@@ -48,4 +48,8 @@ private:
 
 	// Local barrel refernce for spawning the projectile
 	UTankBarrel* Barrel = nullptr;
+
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0;
 };
