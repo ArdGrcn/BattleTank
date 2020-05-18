@@ -17,7 +17,7 @@ ATank::ATank()
 }
 
 
-void ATank::SetTurretReference(UTankTurret* TurretToSet) const
+void ATank::SetTurretReference(UTankTurret* TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
