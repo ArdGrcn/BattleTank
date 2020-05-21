@@ -9,11 +9,6 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ATank* PlayerControlledTank = GetPlayerControlledTank();
-	if (!PlayerControlledTank)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Player controlled tank not found."))
-	}
 }
 
 
