@@ -18,4 +18,6 @@ private:
 
 	virtual void Tick(float DeltaTime) override;
 
+	// How close can get to player tank
+	float AcceptanceRadius = 5;
 };

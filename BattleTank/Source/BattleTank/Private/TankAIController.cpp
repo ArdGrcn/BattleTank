@@ -19,9 +19,12 @@ void ATankAIController::Tick(float DeltaTime)
 	auto AITank = Cast<ATank>(GetPawn());
 	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	if (!AITank || !PlayerTank) { return; }
+	if (AITank && PlayerTank)
+	{
+		MoveToActor(PlayerTank, AcceptanceRadius); // TODO check AcceptanceRadius unit
 
-	AITank->AimAt(PlayerTank->GetActorLocation());
+		AITank->AimAt(PlayerTank->GetActorLocation());
 
-	AITank->Fire();
+		AITank->Fire();
+	}
 }
