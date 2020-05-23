@@ -21,7 +21,7 @@ void ATankAIController::Tick(float DeltaTime)
 
 	if (AITank && PlayerTank)
 	{
-		MoveToActor(PlayerTank, AcceptanceRadius); // TODO check AcceptanceRadius unit
+		MoveToActor(PlayerTank, AcceptanceRadius);
 
 		AITank->AimAt(PlayerTank->GetActorLocation());
 
