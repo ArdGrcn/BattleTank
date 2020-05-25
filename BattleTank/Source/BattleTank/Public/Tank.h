@@ -28,6 +28,7 @@ public:
 	void AimAt(FVector HitLocation) const;
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(BlueprintReadOnly)
