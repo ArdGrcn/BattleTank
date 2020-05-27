@@ -2,7 +2,6 @@
 
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 #include "Tank.h"
 
 // Sets default values
@@ -22,13 +21,13 @@ void ATank::BeginPlay()
 
 void ATank::AimAt(FVector HitLocation) const
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation);
 }
 
 
 void ATank::Fire()
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->Fire();
 }

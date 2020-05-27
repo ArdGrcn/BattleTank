@@ -29,7 +29,7 @@ void UTankAimingComponent::Initialize(UTankTurret* TurretToSet, UTankBarrel* Bar
 
 void UTankAimingComponent::AimAt(FVector HitLocation) const
 {
-	if (!Barrel || !Turret) { return; }
+	if (!ensure(Barrel && Turret)) { return; }
 
 	FVector LaunchVelocity;
 	auto StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -58,15 +58,19 @@ void UTankAimingComponent::AimAt(FVector HitLocation) const
 
 void UTankAimingComponent::Fire()
 {
-	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (!ensure(Barrel)) { return; }
 
-	if (Barrel && bIsReloaded)
+	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	
+	if (bIsReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),
 			Barrel->GetSocketRotation(FName("Projectile"))
 			);
+
+		if (!ensure(Projectile)) { return; }
 
 		Projectile->Launch(LaunchSpeed);
 
@@ -77,7 +81,7 @@ void UTankAimingComponent::Fire()
 
 void UTankAimingComponent::MoveTurretTowards(FVector AimDirection) const
 {
-	if (!Turret || !Barrel) { return; }
+	if (!ensure(Turret)) { return; }
 
 	auto TurretRotator = Turret->GetComponentRotation();
 	auto AimAsRotator = AimDirection.Rotation();
@@ -89,6 +93,8 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimDirection) const
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) const
 {
+	if (!ensure(Barrel)) { return; }
+
 	// calculate the difference between current barrel rotation, and AimDirection
 	auto BarrelRotator = Barrel->GetComponentRotation();
 	auto AimAsRotator = AimDirection.Rotation();
