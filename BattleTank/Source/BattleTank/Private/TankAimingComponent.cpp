@@ -98,6 +98,11 @@ void UTankAimingComponent::Fire()
 	}
 }
 
+EFiringStatus UTankAimingComponent::GetFiringState() const
+{
+	return EFiringStatus();
+}
+
 
 void UTankAimingComponent::MoveTurretTowards(FVector AimDirection) const
 {
@@ -106,6 +111,12 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimDirection) const
 	auto TurretRotator = Turret->GetComponentRotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - TurretRotator;
+
+	// Make tank turret take the shortest yaw to aim
+	if (FMath::Abs(DeltaRotator.Yaw) > 180.f)
+	{
+		DeltaRotator.Yaw *= -1;
+	}
 
 	Turret->Rotate(DeltaRotator.Yaw);
 }
@@ -127,5 +138,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) const
 bool UTankAimingComponent::IsBarrelMoving() const
 {
 	if (!ensure(Barrel)) { return false; }
-	return !Barrel->GetForwardVector().Equals(AimDirection);
+	return !Barrel->GetForwardVector().Equals(AimDirection, 0.01f);
 }

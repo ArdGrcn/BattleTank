@@ -19,7 +19,6 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hit the ground."));
 	DriveTrack();
 	ApplySidewaysForce();
 	CurrentThrottle = 0;
