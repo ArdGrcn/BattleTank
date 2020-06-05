@@ -73,9 +73,6 @@ Plugins/*/Intermediate/*
 # Cache files for the editor to use
 DerivedDataCache/*
 
-#Unreal Engine 4 starter content
-Content/StarterContent/*
-
 #Main menu background image
 Content/UI/MainMenu_BG_Img.uasset
 
