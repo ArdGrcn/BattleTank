@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+#include "TankAimingComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
-#include "TankAimingComponent.h"
 
 
 // Sets default values for this component's properties
@@ -85,10 +85,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 
 	if (bHaveAimSolution)
 	{
-		AimDirection = LaunchVelocity.GetSafeNormal();
-		MoveBarrelTowards(AimDirection);
+		AimingDirection = LaunchVelocity.GetSafeNormal();
+		MoveBarrelTowards(AimingDirection);
 		// calculate launch directions yaw value make it equal to turret yaw
-		MoveTurretTowards(AimDirection);
+		MoveTurretTowards(AimingDirection);
 	}
 }
 
@@ -143,5 +143,5 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) const
 bool UTankAimingComponent::IsBarrelMoving() const
 {
 	if (!ensure(Barrel)) { return false; }
-	return !Barrel->GetForwardVector().Equals(AimDirection, 0.05f);
+	return !Barrel->GetForwardVector().Equals(AimingDirection, 0.05f);
 }

@@ -62,7 +62,7 @@ private:
 
 	double LastFireTime = 0;
 
-	FVector AimDirection;
+	FVector AimingDirection;
 
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
