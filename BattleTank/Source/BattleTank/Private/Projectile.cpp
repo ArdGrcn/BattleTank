@@ -6,6 +6,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "TimerManager.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -40,15 +41,26 @@ void AProjectile::BeginPlay()
 	CollisionMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 }
 
+void AProjectile::Launch(float Speed) const
+{
+	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
+	ProjectileMovement->Activate();
+}
+
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
+
+	SetRootComponent(ImpactBlast);
+	CollisionMesh->DestroyComponent();
+
+	FTimerHandle TimerHandle = FTimerHandle();
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &AProjectile::InTimer, DestroyDelay, false);
 }
 
-void AProjectile::Launch(float Speed) const
+void AProjectile::InTimer()
 {
-	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
-	ProjectileMovement->Activate();
+	Destroy();
 }
