@@ -8,6 +8,7 @@ float ATank::GetHealthPercent() const
 	return (float)CurrentHealth / (float)StartingHealth;
 }
 
+
 // Sets default values
 ATank::ATank()
 {
@@ -16,6 +17,7 @@ ATank::ATank()
 
 }
 
+
 float ATank::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
@@ -23,6 +25,11 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, ACo
 
 	CurrentHealth -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("DamageAmount: %i, DamageToApply: %i, Health: %i"), DamagePoints, DamageToApply, CurrentHealth);
+
+	if (CurrentHealth <= 0)
+	{
+		OnDeath.Broadcast();
+	}
 
 	return DamageToApply;
 }

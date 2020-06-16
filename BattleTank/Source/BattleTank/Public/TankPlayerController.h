@@ -23,8 +23,11 @@ protected:
 	void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 
 private:
-	// start the tank moving the barrel so that a shot would hit
-	// where the crosshair intersects the world
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
+
 	void AimTowardsCrosshair() const;
 
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
