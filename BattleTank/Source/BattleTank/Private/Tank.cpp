@@ -32,7 +32,6 @@ float ATank::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, ACo
 	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
 
 	CurrentHealth -= DamageToApply;
-	UE_LOG(LogTemp, Warning, TEXT("DamageAmount: %i, DamageToApply: %i, Health: %i"), DamagePoints, DamageToApply, CurrentHealth);
 
 	if (CurrentHealth <= 0)
 	{
