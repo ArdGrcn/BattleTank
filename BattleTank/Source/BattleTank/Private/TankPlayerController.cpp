@@ -108,7 +108,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 			HitResult,
 			StartLocation,
 			EndLocation,
-			ECC_Visibility)
+			ECC_Camera)
 		)
 	{
 		HitLocation = HitResult.ImpactPoint;
