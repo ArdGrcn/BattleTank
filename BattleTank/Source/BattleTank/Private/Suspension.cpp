@@ -39,6 +39,12 @@ void ASuspension::Tick(float DeltaTime)
 
 }
 
+void ASuspension::AddDrivingForce(float ForceMagnitude)
+{
+	auto Force = ForceMagnitude * Axel->GetForwardVector();
+	Wheel->AddForce(Force);
+}
+
 void ASuspension::SetupConstraint()
 {
 	// Suspension between the tank and the axel
