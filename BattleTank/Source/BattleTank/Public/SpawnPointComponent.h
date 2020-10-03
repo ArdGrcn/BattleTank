@@ -7,6 +7,7 @@
 #include "SpawnPointComponent.generated.h"
 
 class USphereComponent;
+class ASuspension;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API USpawnPointComponent : public USceneComponent
@@ -16,8 +17,6 @@ class BATTLETANK_API USpawnPointComponent : public USceneComponent
 public:	
 	// Sets default values for this component's properties
 	USpawnPointComponent();
-
-	USphereComponent* GetWheel() const;
 
 protected:
 	// Called when the game starts

@@ -16,12 +16,6 @@ USpawnPointComponent::USpawnPointComponent()
 	// ...
 }
 
-
-USphereComponent* USpawnPointComponent::GetWheel() const
-{
-	return nullptr;
-}
-
 // Called when the game starts
 void USpawnPointComponent::BeginPlay()
 {

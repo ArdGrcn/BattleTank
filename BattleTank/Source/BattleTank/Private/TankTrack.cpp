@@ -16,10 +16,11 @@ void UTankTrack::BeginPlay()
 	
 }
 
-TArray<class ASuspension*> UTankTrack::GetWheels() const
+TArray<AActor*> UTankTrack::GetWheels() const
 {
-	GetAttachChildren();
-	return TArray<class ASuspension*>();
+	TArray<AActor*> Suspensions;
+	GetOwner()->GetAttachedActors(Suspensions);
+	return Suspensions;
 }
 
 void UTankTrack::DriveTrack(float CurrentThrottle)
@@ -30,7 +31,7 @@ void UTankTrack::DriveTrack(float CurrentThrottle)
 	auto ForcePerWheel = ForceApplied / Wheels.Num();
 	for (auto Wheel : Wheels)
 	{
-		Wheel->AddDrivingForce(ForcePerWheel);
+		Cast<ASuspension>(Wheel)->AddDrivingForce(ForcePerWheel);
 	}
 }
 
