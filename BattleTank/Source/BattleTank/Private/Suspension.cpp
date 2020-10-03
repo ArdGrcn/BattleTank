@@ -11,17 +11,17 @@ ASuspension::ASuspension()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Suspension = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("AxleConstraint"));
+	Suspension = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("Suspension"));
 	SetRootComponent(Suspension);
 
-	Axel = CreateDefaultSubobject<USceneComponent>(FName("Axel"));
+	Axel = CreateDefaultSubobject<USphereComponent>(FName("Axel"));
 	Axel->SetupAttachment(Suspension);
 
-	WheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("WheelConstraint"));
-	WheelConstraint->SetupAttachment(Axel);
+	AxelWheelConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("AxelWheelConstraint"));
+	AxelWheelConstraint->SetupAttachment(Axel);
 
 	Wheel = CreateDefaultSubobject<USphereComponent>(FName("Wheel"));
-	Wheel->SetupAttachment(WheelConstraint);
+	Wheel->SetupAttachment(Axel);
 }
 
 // Called when the game starts or when spawned
@@ -45,10 +45,10 @@ void ASuspension::SetupConstraint()
 	if (!GetAttachParentActor()) { return; }
 	auto TankRoot = Cast<UPrimitiveComponent>(GetAttachParentActor()->GetRootComponent());
 	auto PrimAxel = Cast<UPrimitiveComponent>(Axel);
-	if (!(Axel && TankRoot)) { return; }
+	if (!(PrimAxel && TankRoot)) { return; }
 	Suspension->SetConstrainedComponents(TankRoot, NAME_None, PrimAxel, NAME_None);
 	// Rotation constraint for the wheel
 	auto PrimWheel = Cast<UPrimitiveComponent>(Wheel);
-	WheelConstraint->SetConstrainedComponents(PrimAxel, NAME_None, PrimWheel, NAME_None);
+	AxelWheelConstraint->SetConstrainedComponents(PrimAxel, NAME_None, PrimWheel, NAME_None);
 }
 

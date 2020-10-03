@@ -31,10 +31,10 @@ private:
 	UPhysicsConstraintComponent* Suspension = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	USceneComponent* Axel = nullptr;
+	USphereComponent* Axel = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UPhysicsConstraintComponent* WheelConstraint = nullptr;
+	UPhysicsConstraintComponent* AxelWheelConstraint = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	USphereComponent* Wheel = nullptr;
