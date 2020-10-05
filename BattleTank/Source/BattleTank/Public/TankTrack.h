@@ -30,7 +30,7 @@ private:
 
     virtual void BeginPlay() override;
 
-    TArray<AActor*> GetWheels() const;
+    TArray<ASuspension*> GetWheels() const;
 
     void DriveTrack(float CurrentThrottle);
 
