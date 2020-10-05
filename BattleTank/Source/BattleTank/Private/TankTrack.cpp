@@ -23,9 +23,10 @@ TArray<ASuspension*> UTankTrack::GetWheels() const
 	GetOwner()->GetAttachedActors(AttachedActors);
 	for (auto Actor : AttachedActors)
 	{
-		auto Suspension = Cast<ASuspension>(Actor);
-		if (!Suspension) { continue; }
-		Suspensions.Add(Suspension);
+		if (ASuspension* Suspension = Cast<ASuspension>(Actor)) 
+		{ 
+			Suspensions.Add(Suspension);
+		}
 	}
 	return Suspensions;
 }
