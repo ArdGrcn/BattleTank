@@ -2,7 +2,7 @@
 
 #include "TankTrack.h"
 #include "Suspension.h"
-
+#include "SpawnPointComponent.h"
 
 UTankTrack::UTankTrack()
 {
@@ -18,14 +18,17 @@ void UTankTrack::BeginPlay()
 
 TArray<ASuspension*> UTankTrack::GetWheels() const
 {
-	TArray<AActor*> AttachedActors;
+	TArray<USceneComponent*> Children;
 	TArray<ASuspension*> Suspensions;
-	GetOwner()->GetAttachedActors(AttachedActors);
-	for (auto Actor : AttachedActors)
+	GetChildrenComponents(false, Children);
+	for (auto Child : Children)
 	{
-		if (ASuspension* Suspension = Cast<ASuspension>(Actor)) 
-		{ 
-			Suspensions.Add(Suspension);
+		if (USpawnPointComponent* Spawnpoint = Cast<USpawnPointComponent>(Child))
+		{
+			if (ASuspension* Suspension = Cast<ASuspension>(Spawnpoint->GetSpawnedActor()))
+			{
+				Suspensions.Add(Suspension);
+			}
 		}
 	}
 	return Suspensions;
